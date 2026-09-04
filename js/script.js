@@ -63,6 +63,7 @@
   /* ---------- contact form (Formspree AJAX) ---------- */
   var form = document.getElementById("contactForm");
   var status = document.getElementById("formStatus");
+  const button = form.querySelector('button[type="submit"]');
 
   var MESSAGES = {
     vi: {
@@ -71,6 +72,9 @@
       err: "Có lỗi xảy ra, vui lòng thử lại hoặc liên hệ trực tiếp qua điện thoại/email.",
       notConfigured:
         "Form liên hệ chưa được kích hoạt. Vui lòng liên hệ trực tiếp qua điện thoại hoặc email bên dưới.",
+      required: "Vui lòng điền trường này",
+      invalidPhone: "Số điện thoại không hợp lệ",
+      invalidEmail: "Email không hợp lệ",
     },
     en: {
       sending: "Sending...",
@@ -78,6 +82,9 @@
       err: "Something went wrong, please try again or contact us directly by phone/email.",
       notConfigured:
         "The contact form isn't active yet. Please reach out directly by phone or email below.",
+      required: "This field is required",
+      invalidPhone: "Invalid phone number",
+      invalidEmail: "Invalid email address",
     },
   };
 
@@ -85,46 +92,117 @@
     return body.getAttribute("data-lang") === "en" ? "en" : "vi";
   }
 
+  const PHONE_RE = /^\d{9,}$/;
+  const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+
+  function getErrorEl(input, create) {
+    const row = input.closest(".form-row") || input.parentElement;
+    let el = row.querySelector('.field-error[data-for="' + input.name + '"]');
+    if (!el && create) {
+      el = document.createElement("span");
+      el.className = "field-error";
+      el.setAttribute("data-for", input.name);
+      el.setAttribute("role", "alert");
+      input.insertAdjacentElement("afterend", el);
+    }
+    return el;
+  }
+
+  function showError(input, message) {
+    const el = getErrorEl(input, true);
+    el.textContent = message;
+    input.classList.add("is-invalid");
+    input.setAttribute("aria-invalid", "true");
+  }
+
+  function clearError(input) {
+    const el = getErrorEl(input, false);
+    if (el) el.textContent = "";
+    input.classList.remove("is-invalid");
+    input.removeAttribute("aria-invalid");
+  }
+
+  function validateForm(form, msgs) {
+    const fields = [
+      { name: "full_name", required: true },
+      { name: "company_name", required: true },
+      {
+        name: "phone_number",
+        required: true,
+        re: PHONE_RE,
+        err: msgs.invalidPhone,
+      },
+      { name: "email", required: true, re: EMAIL_RE, err: msgs.invalidEmail },
+    ];
+
+    let firstInvalid = null;
+
+    fields.forEach((f) => {
+      const input = form.elements[f.name];
+      const value = input.value.trim();
+      clearError(input);
+
+      if (f.required && !value) {
+        showError(input, msgs.required);
+        firstInvalid = firstInvalid || input;
+        return;
+      }
+
+      const formatValue = f.sanitize ? f.sanitize(value) : value;
+      if (value && f.re && !f.re.test(formatValue)) {
+        showError(input, f.err);
+        firstInvalid = firstInvalid || input;
+      }
+    });
+
+    if (firstInvalid) {
+      firstInvalid.focus();
+      return false;
+    }
+    return true;
+  }
+
+  const ENDPOINT =
+    "https://script.google.com/macros/s/AKfycbxc75yxhjdaDHsSSM7sj8E2a5THTA4LDy6-O8LUXU12VEv-ytYwUkrboLl_QnUmVzhjgw/exec";
   if (form) {
-    form.addEventListener("submit", function (e) {
+    form.addEventListener("submit", async function (e) {
       e.preventDefault();
       var lang = currentLang();
       var msgs = MESSAGES[lang];
+
+      // Validate trước, chưa disable button
+      if (!validateForm(form, msgs)) {
+        status.textContent = "";
+        status.className = "form-status";
+        return;
+      }
+
+      button.disabled = true;
 
       // Honeypot spam check
       var honeypot = form.querySelector('input[name="_gotcha"]');
       if (honeypot && honeypot.value) return;
 
-      var action = form.getAttribute("action") || "";
-      if (action.indexOf("YOUR_FORM_ID") !== -1) {
-        status.textContent = msgs.notConfigured;
-        status.className = "form-status err";
-        return;
-      }
+      const dataForm = Object.fromEntries(new FormData(form));
 
-      status.textContent = msgs.sending;
-      status.className = "form-status";
+      try {
+        status.textContent = msgs.sending;
+        status.className = "form-status";
 
-      var data = new FormData(form);
-      fetch(action, {
-        method: "POST",
-        body: data,
-        headers: { Accept: "application/json" },
-      })
-        .then(function (response) {
-          if (response.ok) {
-            status.textContent = msgs.ok;
-            status.className = "form-status ok";
-            form.reset();
-          } else {
-            status.textContent = msgs.err;
-            status.className = "form-status err";
-          }
-        })
-        .catch(function () {
-          status.textContent = msgs.err;
-          status.className = "form-status err";
+        const res = await fetch(ENDPOINT, {
+          method: "POST",
+          headers: { "Content-Type": "text/plain;charset=utf-8" },
+          body: JSON.stringify(dataForm),
         });
+        await res.json();
+
+        status.textContent = msgs.ok;
+      } catch (error) {
+        status.textContent = msgs.err;
+        status.className = "form-status err";
+      } finally {
+        button.disabled = false;
+      }
     });
   }
 

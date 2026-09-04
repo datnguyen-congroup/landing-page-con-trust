@@ -20,6 +20,7 @@
   --shadow: 0 10px 30px -12px rgba(19, 74, 134, 0.18);
   --container: 1160px;
   --font: "Montserrat", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --icon-mark: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 2L15 9L22 12L15 15L12 22L9 15L2 12L9 9Z'/%3E%3C/svg%3E");
 }
 
 * {
@@ -104,23 +105,26 @@ ul {
   vertical-align: -1px;
   background-color: currentColor;
   opacity: 0.8;
-  -webkit-mask: url("../assets/img/brand/icon-mark.svg") center/contain
-    no-repeat;
-  mask: url("../assets/img/brand/icon-mark.svg") center/contain no-repeat;
+  -webkit-mask: var(--icon-mark) center/contain no-repeat;
+  mask: var(--icon-mark) center/contain no-repeat;
 }
 
 .section-dark .eyebrow {
   color: var(--sky);
 }
 
-/* ---------- brand decoration: pattern texture + ornament mark ---------- */
 .deco-ornament {
   position: absolute;
   z-index: 0;
   pointer-events: none;
   background-color: currentColor;
-  -webkit-mask: url("../assets/img/brand/ornament.svg") center/contain no-repeat;
-  mask: url("../assets/img/brand/ornament.svg") center/contain no-repeat;
+  /* -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M50 5 L95 50 L50 95 L5 50 Z'/%3E%3C/svg%3E")
+    center/contain no-repeat;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M50 5 L95 50 L50 95 L5 50 Z'/%3E%3C/svg%3E")
+    center/contain no-repeat; */
+
+  -webkit-mask: var(--ornament) center/contain no-repeat;
+  mask: var(--ornament) center/contain no-repeat;
   animation: deco-spin 160s linear infinite;
 }
 @keyframes deco-spin {
@@ -135,8 +139,10 @@ ul {
   z-index: 0;
   pointer-events: none;
   background-color: currentColor;
-  -webkit-mask: url("../assets/img/brand/pattern-tile.svg") repeat;
-  mask: url("../assets/img/brand/pattern-tile.svg") repeat;
+  /* -webkit-mask: url("../assets/img/brand/pattern-tile.svg") repeat;
+  mask: url("../assets/img/brand/pattern-tile.svg") repeat; */
+  -webkit-mask: var(--pattern-tile) center/contain repeat;
+  mask: var(--pattern-tile) center/contain repeat;
   -webkit-mask-size: 72px 72px;
   mask-size: 72px 72px;
 }
@@ -853,11 +859,11 @@ body[data-lang="en"] .lang-switch-vi {
   z-index: 0;
   background-color: currentColor;
   color: rgba(19, 74, 134, 0.07);
-  -webkit-mask: url("../assets/img/brand/icon-mark.svg") center/contain
-    no-repeat;
-  mask: url("../assets/img/brand/icon-mark.svg") center/contain no-repeat;
+  -webkit-mask: var(--icon-mark) center/contain no-repeat;
+  mask: var(--icon-mark) center/contain no-repeat;
   pointer-events: none;
 }
+
 .price-card > * {
   position: relative;
   z-index: 1;
@@ -1085,6 +1091,17 @@ body[data-lang="en"] .lang-switch-vi {
 }
 .form-status.err {
   color: #b3261e;
+}
+.field-error {
+  display: block;
+  margin-top: 4px;
+  font-size: 13px;
+  color: #d93025;
+  min-height: 18px;
+}
+input.is-invalid,
+textarea.is-invalid {
+  border-color: #d93025;
 }
 
 /* ---------- footer ---------- */

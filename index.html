@@ -14,9 +14,9 @@
       rel="icon"
       type="image/png"
       sizes="32x32"
-      href="assets/img/icon-32.png"
+      href="assets/img/dist/favicon.ico"
     />
-    <link rel="apple-touch-icon" href="assets/img/icon-180.png" />
+    <link rel="apple-touch-icon" href="assets/img/dist/icon-180-180.avif" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -31,7 +31,7 @@
       <div class="container header-inner">
         <a href="#top" class="brand">
           <img
-            src="assets/img/logo-navy.png"
+            src="assets/img/dist/logo-navy-480.avif"
             alt="ConTrust"
             class="brand-logo"
           />
@@ -343,7 +343,10 @@
 
         <div class="founder-grid">
           <div class="founder-mark">
-            <img src="assets/img/founder-avatar.jpg" alt="Anh Hoàng Anh Tuấn" />
+            <img
+              src="assets/img/dist/founder-avatar-480.avif"
+              alt="Anh Hoàng Anh Tuấn"
+            />
           </div>
           <div class="founder-text">
             <p class="lang-vi">
@@ -846,76 +849,85 @@
         <div class="clients-grid reveal-group">
           <div class="client-logo reveal">
             <img
-              src="assets/img/clients/rang.jpg"
+              src="assets/img/dist/clients/rang-480.avif"
               alt="RaNG - Internationally Indian"
             />
           </div>
           <div class="client-logo reveal">
-            <img src="assets/img/clients/phirang.png" alt="Phirang" />
-          </div>
-          <div class="client-logo reveal">
-            <img src="assets/img/clients/uchi-sushi.jpg" alt="Uchi Sushi" />
+            <img src="assets/img/dist/clients/phirang-480.avif" alt="Phirang" />
           </div>
           <div class="client-logo reveal">
             <img
-              src="assets/img/clients/omakase-by-uchi.jpg"
+              src="assets/img/dist/clients/uchi-sushi-480.avif"
+              alt="Uchi Sushi"
+            />
+          </div>
+          <div class="client-logo reveal">
+            <img
+              src="assets/img/dist/clients/omakase-by-uchi-480.avif"
               alt="Omakase by Uchi"
             />
           </div>
           <div class="client-logo reveal">
             <img
-              src="assets/img/clients/omakase-by-eddie.jpg"
+              src="assets/img/dist/clients/omakase-by-eddie-480.avif"
               alt="Omakase by Eddie"
             />
           </div>
           <div class="client-logo reveal">
-            <img src="assets/img/clients/the-keepsake.jpg" alt="The Keepsake" />
+            <img
+              src="assets/img/dist/clients/the-keepsake-480.avif"
+              alt="The Keepsake"
+            />
           </div>
           <div class="client-logo reveal">
-            <img src="assets/img/clients/ky-vat.jpg" alt="Kỷ Vật" />
+            <img src="assets/img/dist/clients/ky-vat-480.avif" alt="Kỷ Vật" />
           </div>
           <div class="client-logo reveal">
             <img
-              src="assets/img/clients/la-men.jpg"
+              src="assets/img/dist/clients/la-men-480.avif"
               alt="Là Mèn Coffee Brunch Art Gallery"
             />
           </div>
           <div class="client-logo reveal">
-            <img src="assets/img/clients/n-retreat.png" alt="N Retreat" />
+            <img
+              src="assets/img/dist/clients/n-retreat-480.avif"
+              alt="N Retreat"
+            />
           </div>
           <div class="client-logo reveal">
             <img
-              src="assets/img/clients/the-hype-poolside.jpg"
+              src="assets/img/dist/clients/the-hype-poolside-480.avif"
               alt="The Hype Poolside Eatery"
             />
           </div>
           <div class="client-logo reveal">
             <img
-              src="assets/img/clients/the-hype-catering.jpg"
+              src="assets/img/dist/clients/the-hype-catering-480.avif"
               alt="The Hype Catering"
             />
           </div>
           <div class="client-logo reveal">
             <img
-              src="assets/img/clients/b-billiard-cafe.jpg"
+              src="assets/img/dist/clients/b-billiard-cafe-480.avif"
               alt="B Billiard Library Cafe"
             />
           </div>
           <div class="client-logo reveal">
             <img
-              src="assets/img/clients/the-viet-concept.jpeg"
+              src="assets/img/dist/clients/the-viet-concept-480.avif"
               alt="The Viet Concept"
             />
           </div>
           <div class="client-logo reveal">
             <img
-              src="assets/img/clients/phu-quoc-tropical.jpg"
+              src="assets/img/dist/clients/phu-quoc-tropical-480.avif"
               alt="Phu Quoc Tropical"
             />
           </div>
           <div class="client-logo reveal">
             <img
-              src="assets/img/clients/the-future-analyst.jpg"
+              src="assets/img/dist/clients/the-future-analyst-480.avif"
               alt="The Future Analyst"
             />
           </div>
@@ -1249,48 +1261,52 @@
         </div>
 
         <div class="contact-form-wrap">
-          <form
-            id="contactForm"
-            class="contact-form"
-            action="https://formspree.io/f/YOUR_FORM_ID"
-            method="POST"
-          >
+          <form id="contactForm" class="contact-form" novalidate>
             <div class="form-row">
-              <label for="f-name">
+              <label for="full_name">
                 <span class="lang-vi">Họ và tên</span
                 ><span class="lang-en">Full name</span>
               </label>
-              <input type="text" id="f-name" name="name" required />
+              <input type="text" id="full_name" name="full_name" required />
             </div>
             <div class="form-row">
-              <label for="f-company">
+              <label for="company_name">
                 <span class="lang-vi">Tên doanh nghiệp</span
                 ><span class="lang-en">Company name</span>
               </label>
-              <input type="text" id="f-company" name="company" />
+              <input type="text" id="company_name" name="company_name" />
             </div>
             <div class="form-row form-row-split">
               <div>
-                <label for="f-phone">
+                <label for="phone_number">
                   <span class="lang-vi">Số điện thoại</span
                   ><span class="lang-en">Phone number</span>
                 </label>
-                <input type="tel" id="f-phone" name="phone" required />
+                <input
+                  type="tel"
+                  id="phone_number"
+                  name="phone_number"
+                  required
+                />
               </div>
               <div>
-                <label for="f-email">
+                <label for="email">
                   <span class="lang-vi">Email</span
                   ><span class="lang-en">Email</span>
                 </label>
-                <input type="email" id="f-email" name="email" required />
+                <input type="email" id="email" name="email" required />
               </div>
             </div>
             <div class="form-row">
-              <label for="f-message">
+              <label for="customer_needs">
                 <span class="lang-vi">Nhu cầu của bạn</span
                 ><span class="lang-en">What do you need help with?</span>
               </label>
-              <textarea id="f-message" name="message" rows="4"></textarea>
+              <textarea
+                id="customer_needs"
+                name="customer_needs"
+                rows="4"
+              ></textarea>
             </div>
             <input
               type="text"
@@ -1320,7 +1336,7 @@
       <div class="bg-texture" aria-hidden="true"></div>
       <div class="container footer-inner">
         <img
-          src="assets/img/logo-white.png"
+          src="assets/img/dist/logo-white-480.avif"
           alt="ConTrust"
           class="footer-logo"
         />
