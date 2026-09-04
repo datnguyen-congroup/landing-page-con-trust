@@ -4,7 +4,6 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "images": "node js/optimize-images.js"
   },
   "keywords": [],
@@ -18,7 +17,9 @@
     }
   },
   "type": "module",
+  "packageManager": "pnpm@11.25.0",
   "devDependencies": {
-    "sharp": "^0.35.4"
+    "sharp": "^0.35.4",
+    "wrangler": "^4.128.0"
   }
 }
