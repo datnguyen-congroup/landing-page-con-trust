@@ -3,18 +3,28 @@
 
   var body = document.body;
   var STORAGE_KEY = "contrust_lang";
-  var prefersReducedMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var prefersReducedMotion =
+    window.matchMedia &&
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   /* ---------- language toggle ---------- */
   function setLang(lang) {
     body.setAttribute("data-lang", lang);
     document.documentElement.setAttribute("lang", lang);
-    try { localStorage.setItem(STORAGE_KEY, lang); } catch (e) { /* ignore */ }
+    try {
+      localStorage.setItem(STORAGE_KEY, lang);
+    } catch (e) {
+      /* ignore */
+    }
   }
 
   function initLang() {
     var saved = null;
-    try { saved = localStorage.getItem(STORAGE_KEY); } catch (e) { /* ignore */ }
+    try {
+      saved = localStorage.getItem(STORAGE_KEY);
+    } catch (e) {
+      /* ignore */
+    }
     if (saved === "vi" || saved === "en") setLang(saved);
   }
 
@@ -59,14 +69,16 @@
       sending: "Đang gửi...",
       ok: "Cảm ơn bạn! ConTrust đã nhận được thông tin và sẽ liên hệ sớm.",
       err: "Có lỗi xảy ra, vui lòng thử lại hoặc liên hệ trực tiếp qua điện thoại/email.",
-      notConfigured: "Form liên hệ chưa được kích hoạt. Vui lòng liên hệ trực tiếp qua điện thoại hoặc email bên dưới."
+      notConfigured:
+        "Form liên hệ chưa được kích hoạt. Vui lòng liên hệ trực tiếp qua điện thoại hoặc email bên dưới.",
     },
     en: {
       sending: "Sending...",
       ok: "Thank you! ConTrust has received your details and will reach out soon.",
       err: "Something went wrong, please try again or contact us directly by phone/email.",
-      notConfigured: "The contact form isn't active yet. Please reach out directly by phone or email below."
-    }
+      notConfigured:
+        "The contact form isn't active yet. Please reach out directly by phone or email below.",
+    },
   };
 
   function currentLang() {
@@ -97,7 +109,7 @@
       fetch(action, {
         method: "POST",
         body: data,
-        headers: { "Accept": "application/json" }
+        headers: { Accept: "application/json" },
       })
         .then(function (response) {
           if (response.ok) {
@@ -121,16 +133,21 @@
     document.documentElement.classList.add("has-reveal");
 
     var revealEls = document.querySelectorAll(".reveal");
-    var io = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("is-visible");
-          io.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.15, rootMargin: "0px 0px -40px 0px" });
+    var io = new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
+            io.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.15, rootMargin: "0px 0px -40px 0px" },
+    );
 
-    revealEls.forEach(function (el) { io.observe(el); });
+    revealEls.forEach(function (el) {
+      io.observe(el);
+    });
   }
 
   /* ---------- hero stat counters ---------- */
