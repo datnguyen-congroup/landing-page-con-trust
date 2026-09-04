@@ -163,7 +163,7 @@
   }
 
   const ENDPOINT =
-    "https://script.google.com/macros/s/AKfycbxc75yxhjdaDHsSSM7sj8E2a5THTA4LDy6-O8LUXU12VEv-ytYwUkrboLl_QnUmVzhjgw/exec";
+    "https://script.google.com/macros/s/AKfycbyeXkhSYtL5SegUuVwjfcALLlls4GwKglmTGp9PPwsbWfDpK8JHmqHmk8yhjs4ry_BMgQ/exec";
   if (form) {
     form.addEventListener("submit", async function (e) {
       e.preventDefault();
