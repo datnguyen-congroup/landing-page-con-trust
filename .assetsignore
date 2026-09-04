@@ -1,0 +1,8 @@
+node_modules
+package.json
+pnpm-lock.yaml
+wrangler.jsonc
+.assetsignore
+js/optimize-images.js
+assets/img/src
+.git
