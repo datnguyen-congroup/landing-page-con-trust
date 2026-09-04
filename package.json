@@ -2,20 +2,13 @@
   "name": "landing-page-con-trust",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
   "scripts": {
-    "images": "node js/optimize-images.js"
+    "images": "node js/optimize-images.js",
+    "deploy": "wrangler deploy"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "devEngines": {
-    "packageManager": {
-      "name": "pnpm",
-      "version": "^11.1.3",
-      "onFail": "download"
-    }
-  },
   "type": "module",
   "packageManager": "pnpm@11.25.0",
   "devDependencies": {
