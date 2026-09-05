@@ -4,11 +4,11 @@
   "description": "",
   "scripts": {
     "images": "node scripts/optimize-images.js",
-    "clean": "shx rm -rf dist",
-    "copy": "shx mkdir -p dist/css dist/js dist/assets/img/dist && shx cp -r assets/img/dist/* dist/assets/img/dist/ && shx cp CNAME dist/",
-    "css": "cleancss -O2 -o dist/css/style.css css/style.css",
-    "js": "terser js/script.js -c -m -o dist/js/script.js",
-    "html": "html-minifier-terser --collapse-whitespace --remove-comments --minify-css --minify-js -o dist/index.html index.html",
+    "clean": "shx rm -rf docs",
+    "copy": "shx mkdir -p docs/css docs/js docs/assets/img/dist && shx cp -r assets/img/dist/* docs/assets/img/dist/ && shx cp CNAME docs/",
+    "css": "cleancss -O2 -o docs/css/style.css css/style.css",
+    "js": "terser js/script.js -c -m -o docs/js/script.js",
+    "html": "html-minifier-terser --collapse-whitespace --remove-comments --minify-css --minify-js -o docs/index.html index.html",
     "build": "pnpm run clean && pnpm run images && pnpm run copy && pnpm run css && pnpm run js && pnpm run html"
   },
   "keywords": [],
