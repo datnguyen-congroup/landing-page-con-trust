@@ -3,8 +3,13 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "images": "node js/optimize-images.js",
-    "deploy": "wrangler deploy"
+    "images": "node scripts/optimize-images.js",
+    "clean": "shx rm -rf dist",
+    "copy": "shx mkdir -p dist/css dist/js dist/assets/img/dist && shx cp -r assets/img/dist/* dist/assets/img/dist/ && shx cp CNAME dist/",
+    "css": "cleancss -O2 -o dist/css/style.css css/style.css",
+    "js": "terser js/script.js -c -m -o dist/js/script.js",
+    "html": "html-minifier-terser --collapse-whitespace --remove-comments --minify-css --minify-js -o dist/index.html index.html",
+    "build": "pnpm run clean && pnpm run images && pnpm run copy && pnpm run css && pnpm run js && pnpm run html"
   },
   "keywords": [],
   "author": "",
@@ -12,7 +17,10 @@
   "type": "module",
   "packageManager": "pnpm@11.25.0",
   "devDependencies": {
+    "clean-css-cli": "^5.6.3",
+    "html-minifier-terser": "^7.2.0",
     "sharp": "^0.35.4",
-    "wrangler": "^4.128.0"
+    "shx": "^0.4.0",
+    "terser": "^5.51.2"
   }
 }
